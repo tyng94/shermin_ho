@@ -46,7 +46,7 @@ resource "aws_s3_bucket_policy" "site" {
 # --- Route 53 ---
 
 data "aws_route53_zone" "zone" {
-  name = local.domain
+  zone_id = "Z04966201X2PHQ3W15FOK"
 }
 
 resource "aws_route53_record" "site" {
