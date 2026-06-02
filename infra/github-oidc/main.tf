@@ -32,23 +32,35 @@ resource "aws_iam_role" "github_actions" {
 }
 
 resource "aws_iam_role_policy" "github_actions" {
-  name = "s3-deploy"
+  name = "deploy"
   role = aws_iam_role.github_actions.id
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{
-      Effect = "Allow"
-      Action = [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:DeleteObject",
-        "s3:ListBucket"
-      ]
-      Resource = [
-        "arn:aws:s3:::sherminho.com",
-        "arn:aws:s3:::sherminho.com/*"
-      ]
-    }]
+    Statement = [
+      {
+        Sid    = "S3Website"
+        Effect = "Allow"
+        Action = ["s3:*"]
+        Resource = [
+          "arn:aws:s3:::sherminho.com",
+          "arn:aws:s3:::sherminho.com/*",
+          "arn:aws:s3:::shermin-ho-tfstate",
+          "arn:aws:s3:::shermin-ho-tfstate/*",
+        ]
+      },
+      {
+        Sid      = "Route53"
+        Effect   = "Allow"
+        Action   = ["route53:*"]
+        Resource = ["*"]
+      },
+      {
+        Sid      = "IAM"
+        Effect   = "Allow"
+        Action   = ["iam:*"]
+        Resource = ["*"]
+      }
+    ]
   })
 }
