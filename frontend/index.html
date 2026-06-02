@@ -96,6 +96,7 @@
     width: 132px; height: 132px; border-radius: 50%;
     margin-top: -66px; border: 5px solid var(--card);
     position: relative; z-index: 2;
+    object-fit: cover; object-position: center top;
   }
   .name-row { display: flex; align-items: center; gap: 9px; margin-top: 14px; }
   .name {
@@ -170,7 +171,7 @@
   .post-author { font-size: 14.5px; font-weight: 600; line-height: 1.2; }
   .post-time { font-size: 12.5px; color: var(--ink-faint); margin-top: 2px; }
   .post-text { font-size: 14.5px; color: #38342c; margin: 0 0 14px; }
-  .post-img { width: 100%; height: 300px; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+  .post-img { width: 100%; height: 300px; border-radius: var(--radius-sm); border: 1px solid var(--line); object-fit: cover; display: block; }
   .react-row {
     display: flex; gap: 24px; margin-top: 14px;
     font-size: 13px; color: var(--ink-soft); font-weight: 500;
@@ -226,7 +227,7 @@
     <section class="card" data-screen-label="Header">
       <div class="ph banner">banner — a favorite team photo</div>
       <div class="header-body">
-        <div class="ph avatar ph-circle">profile photo</div>
+        <img src="images/shermin.jpeg" class="avatar" alt="Shermin Ho">
         <div class="name-row">
           <h1 class="name">Shermin Ho</h1>
           <svg class="verified" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -298,7 +299,7 @@
           <div><div class="post-author">A teammate</div><div class="post-time">on a day we won't forget</div></div>
         </div>
         <p class="post-text">A caption for this memory — what we were doing, why it mattered, the joke that still gets repeated.</p>
-        <div class="ph post-img">photo — a project, an offsite, a celebration</div>
+        <img src="images/locus.jpg" class="post-img" alt="">
         <div class="react-row">
           <span class="react"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 1.8 5 5.2 5c2 0 3.3 1.2 3.8 2.3C9.5 6.2 10.8 5 12.8 5 16.2 5 17.6 8.5 16 11.7 13.5 16.4 12 21 12 21z"/></svg>liked by the whole team</span>
           <span class="react">a thread of replies</span>

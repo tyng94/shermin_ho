@@ -45,12 +45,12 @@ resource "aws_s3_bucket_policy" "site" {
 
 # --- Route 53 ---
 
-resource "aws_route53_zone" "zone" {
+data "aws_route53_zone" "zone" {
   name = local.domain
 }
 
 resource "aws_route53_record" "site" {
-  zone_id = aws_route53_zone.zone.zone_id
+  zone_id = data.aws_route53_zone.zone.zone_id
   name    = local.domain
   type    = "A"
 
