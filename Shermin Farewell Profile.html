@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shermin Ho — A Fond Farewell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --page: #f4f1ea;
+    --card: #ffffff;
+    --ink: #232019;
+    --ink-soft: #6f6a60;
+    --ink-faint: #9b958a;
+    --line: #e6e1d6;
+    --line-soft: #f0ece3;
+    --fill: #efebe2;
+
+    --accent: oklch(0.56 0.105 45);        /* clay / terracotta */
+    --accent-deep: oklch(0.47 0.10 42);
+    --accent-soft: oklch(0.95 0.022 55);    /* faint warm tint */
+    --accent-line: oklch(0.88 0.04 50);
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --gap: 18px;
+    --shadow: 0 1px 2px rgba(40,33,20,0.04), 0 6px 24px -12px rgba(40,33,20,0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--page);
+    font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 16px 100px;
+  }
+
+  .sheet {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  .draft-note {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    margin: 0 0 6px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-pad { padding: 26px 28px; }
+
+  .section-title {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 20px;
+  }
+
+  /* ---------- image placeholder ---------- */
+  .ph {
+    background-color: var(--accent-soft);
+    background-image:
+      repeating-linear-gradient(-45deg, transparent, transparent 11px, rgba(180,150,120,0.13) 11px, rgba(180,150,120,0.13) 12px);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent-deep);
+    font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+    font-weight: 600; text-align: center; padding: 14px;
+  }
+
+  /* ---------- HEADER ---------- */
+  .banner { height: 168px; }
+  .header-body { padding: 0 28px 26px; }
+  .avatar {
+    width: 132px; height: 132px; border-radius: 50%;
+    margin-top: -66px; border: 5px solid var(--card);
+    position: relative; z-index: 2;
+  }
+  .name-row { display: flex; align-items: center; gap: 9px; margin-top: 14px; }
+  .name {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 33px; font-weight: 500; letter-spacing: -0.015em;
+    line-height: 1.1; margin: 0;
+  }
+  .verified {
+    width: 21px; height: 21px; flex: none;
+    color: var(--accent);
+  }
+  .headline { font-size: 16px; color: var(--ink); margin: 7px 0 0; max-width: 90%; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 6px 14px;
+    font-size: 13px; color: var(--ink-soft); margin-top: 11px;
+  }
+  .meta .strong { color: var(--accent-deep); font-weight: 600; }
+  .meta .sep { color: var(--ink-faint); }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .btn {
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    border-radius: 999px; padding: 9px 22px; cursor: pointer;
+    border: 1.5px solid transparent; transition: all .15s ease;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-deep); }
+  .btn-ghost { background: transparent; color: var(--accent-deep); border-color: var(--accent-line); }
+  .btn-ghost:hover { background: var(--accent-soft); }
+  .btn-icon {
+    background: transparent; color: var(--ink-soft);
+    border-color: var(--line); padding: 9px 14px;
+  }
+  .btn-icon:hover { background: var(--line-soft); }
+
+  /* ---------- ABOUT ---------- */
+  .about-text { font-size: 15.5px; color: #38342c; margin: 0; }
+  .about-text + .about-text { margin-top: 14px; }
+  .about-text em { font-family: "Newsreader", serif; font-style: italic; color: var(--accent-deep); }
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat {
+    border: 1px solid var(--line); border-radius: var(--radius-sm);
+    padding: 18px 14px; text-align: center; background: var(--accent-soft);
+  }
+  .stat .num {
+    font-family: "Newsreader", serif; font-weight: 500;
+    font-size: 30px; color: var(--accent-deep); line-height: 1;
+  }
+  .stat .cap { font-size: 12px; color: var(--ink-soft); margin-top: 7px; letter-spacing: 0.01em; }
+
+  .ach-list { display: flex; flex-direction: column; gap: 18px; }
+  .ach-item { display: flex; gap: 15px; align-items: flex-start; }
+  .ach-ico {
+    width: 34px; height: 34px; border-radius: 9px; flex: none;
+    background: var(--accent-soft); color: var(--accent-deep);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ach-ico svg { width: 18px; height: 18px; }
+  .ach-h { font-size: 15px; font-weight: 600; margin: 1px 0 3px; }
+  .ach-p { font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+
+  /* ---------- ACTIVITY ---------- */
+  .post { padding: 22px 0; border-top: 1px solid var(--line-soft); }
+  .post:first-of-type { padding-top: 4px; border-top: none; }
+  .post:last-child { padding-bottom: 0; }
+  .post-head { display: flex; gap: 12px; align-items: center; margin-bottom: 13px; }
+  .mini-avatar { width: 46px; height: 46px; border-radius: 50%; flex: none; font-size: 8px; }
+  .ph-circle { border-radius: 50%; }
+  .post-author { font-size: 14.5px; font-weight: 600; line-height: 1.2; }
+  .post-time { font-size: 12.5px; color: var(--ink-faint); margin-top: 2px; }
+  .post-text { font-size: 14.5px; color: #38342c; margin: 0 0 14px; }
+  .post-img { width: 100%; height: 300px; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+  .react-row {
+    display: flex; gap: 24px; margin-top: 14px;
+    font-size: 13px; color: var(--ink-soft); font-weight: 500;
+  }
+  .react { display: inline-flex; align-items: center; gap: 7px; }
+  .react svg { width: 16px; height: 16px; color: var(--accent); }
+
+  /* ---------- SKILLS ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 9px;
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 9px 8px 16px; background: var(--card);
+    font-size: 13.5px; font-weight: 500;
+  }
+  .chip .count {
+    background: var(--accent-soft); color: var(--accent-deep);
+    font-size: 12px; font-weight: 700; border-radius: 999px;
+    padding: 3px 10px; min-width: 30px; text-align: center;
+  }
+
+  /* ---------- RECOMMENDATIONS ---------- */
+  .rec { padding: 22px 0; border-top: 1px solid var(--line-soft); }
+  .rec:first-of-type { padding-top: 2px; border-top: none; }
+  .rec:last-child { padding-bottom: 0; }
+  .rec-head { display: flex; gap: 13px; align-items: center; margin-bottom: 13px; }
+  .rec-name { font-size: 14.5px; font-weight: 600; line-height: 1.25; }
+  .rec-rel { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+  .rec-quote {
+    font-family: "Newsreader", Georgia, serif; font-style: italic;
+    font-size: 17px; line-height: 1.55; color: #34302a; margin: 0;
+    position: relative; padding-left: 18px;
+  }
+  .rec-quote::before {
+    content: "\201C"; position: absolute; left: -4px; top: -6px;
+    font-size: 40px; color: var(--accent-line); font-style: normal;
+  }
+
+  .footer {
+    text-align: center; color: var(--ink-faint);
+    font-size: 13px; margin-top: 6px;
+  }
+  .footer .heart { color: var(--accent); }
+</style>
+</head>
+<body>
+
+  <p class="draft-note">Styling preview · placeholder copy &amp; images — real content comes next</p>
+
+  <div class="sheet">
+
+    <!-- ============ HEADER ============ -->
+    <section class="card" data-screen-label="Header">
+      <div class="ph banner">banner — a favorite team photo</div>
+      <div class="header-body">
+        <div class="ph avatar ph-circle">profile photo</div>
+        <div class="name-row">
+          <h1 class="name">Shermin Ho</h1>
+          <svg class="verified" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 1.5l2.4 1.9 3 .1 1.1 2.8 2.5 1.7-.9 2.9.9 2.9-2.5 1.7-1.1 2.8-3 .1L12 22.5l-2.4-1.9-3-.1-1.1-2.8L3 16l.9-2.9L3 10.2l2.5-1.7L6.6 5.7l3-.1L12 1.5z"/>
+            <path d="M10.6 14.6l-2-2-1.3 1.3 3.3 3.3 5.8-5.8-1.3-1.3-4.5 4.5z" fill="#fff"/>
+          </svg>
+        </div>
+        <p class="headline">Product Manager &amp; Software Engineer</p>
+        <div class="meta">
+          <span><span class="strong">The Team</span> · 4 unforgettable years</span>
+          <span class="sep">·</span>
+          <span>Somewhere we'll miss her</span>
+          <span class="sep">·</span>
+          <span><span class="strong">500+</span> people who'll vouch for her</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Message
+          </button>
+          <button class="btn btn-ghost">Wish her well</button>
+          <button class="btn btn-icon">More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="card card-pad" data-screen-label="About">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">Who she is to us</p>
+      <p class="about-text">A few warm paragraphs about Shermin will live here — the kind of teammate she's been, the way she leads, the energy she brought to every room and every standup.</p>
+      <p class="about-text">A line or two about what made her unforgettable, and the bittersweet truth that <em>the team won't be quite the same without her.</em></p>
+    </section>
+
+    <!-- ============ ACHIEVEMENTS ============ -->
+    <section class="card card-pad" data-screen-label="Achievements">
+      <h2 class="section-title">Achievements &amp; Highlights</h2>
+      <p class="section-sub">A few things she'll be remembered for</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="num">00</div><div class="cap">a stat worth bragging about</div></div>
+        <div class="stat"><div class="num">00</div><div class="cap">another milestone</div></div>
+        <div class="stat"><div class="num">00</div><div class="cap">one more for good measure</div></div>
+      </div>
+      <div class="ach-list">
+        <div class="ach-item">
+          <span class="ach-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+          <div><div class="ach-h">A signature achievement goes here</div><p class="ach-p">A sentence describing the project, launch, or moment — and the impact it had on the team.</p></div>
+        </div>
+        <div class="ach-item">
+          <span class="ach-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+          <div><div class="ach-h">Another highlight worth calling out</div><p class="ach-p">A short note about what she shipped, fixed, or made better for everyone around her.</p></div>
+        </div>
+        <div class="ach-item">
+          <span class="ach-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <div><div class="ach-h">The thing only she could do</div><p class="ach-p">A favorite story or trait — the way she mentored, unblocked, or held the team together.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ACTIVITY ============ -->
+    <section class="card card-pad" data-screen-label="Activity">
+      <h2 class="section-title">Activity</h2>
+      <p class="section-sub">Moments worth reposting · ~5 posts</p>
+
+      <!-- post 1 — photo -->
+      <article class="post">
+        <div class="post-head">
+          <div class="ph mini-avatar ph-circle">pic</div>
+          <div><div class="post-author">A teammate</div><div class="post-time">on a day we won't forget</div></div>
+        </div>
+        <p class="post-text">A caption for this memory — what we were doing, why it mattered, the joke that still gets repeated.</p>
+        <div class="ph post-img">photo — a project, an offsite, a celebration</div>
+        <div class="react-row">
+          <span class="react"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 1.8 5 5.2 5c2 0 3.3 1.2 3.8 2.3C9.5 6.2 10.8 5 12.8 5 16.2 5 17.6 8.5 16 11.7 13.5 16.4 12 21 12 21z"/></svg>liked by the whole team</span>
+          <span class="react">a thread of replies</span>
+        </div>
+      </article>
+
+      <!-- post 2 — text only -->
+      <article class="post">
+        <div class="post-head">
+          <div class="ph mini-avatar ph-circle">pic</div>
+          <div><div class="post-author">A teammate</div><div class="post-time">sometime last spring</div></div>
+        </div>
+        <p class="post-text">A text-only memory or quote — something she said in a meeting that became team lore, or a win we celebrated together.</p>
+        <div class="react-row">
+          <span class="react"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 1.8 5 5.2 5c2 0 3.3 1.2 3.8 2.3C9.5 6.2 10.8 5 12.8 5 16.2 5 17.6 8.5 16 11.7 13.5 16.4 12 21 12 21z"/></svg>so many reactions</span>
+          <span class="react">replies</span>
+        </div>
+      </article>
+
+      <!-- post 3 — photo -->
+      <article class="post">
+        <div class="post-head">
+          <div class="ph mini-avatar ph-circle">pic</div>
+          <div><div class="post-author">A teammate</div><div class="post-time">the early days</div></div>
+        </div>
+        <p class="post-text">Another snapshot — maybe her first week, a launch party, or that conference trip.</p>
+        <div class="ph post-img">photo</div>
+        <div class="react-row">
+          <span class="react"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 1.8 5 5.2 5c2 0 3.3 1.2 3.8 2.3C9.5 6.2 10.8 5 12.8 5 16.2 5 17.6 8.5 16 11.7 13.5 16.4 12 21 12 21z"/></svg>liked</span>
+          <span class="react">replies</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="card card-pad" data-screen-label="Skills">
+      <h2 class="section-title">Skills &amp; Endorsements</h2>
+      <p class="section-sub">The official record (mostly true) — endorsed by the team</p>
+      <div class="chips">
+        <span class="chip">Making standups bearable <span class="count">99+</span></span>
+        <span class="chip">Shipping under pressure <span class="count">42</span></span>
+        <span class="chip">Snack diplomacy <span class="count">38</span></span>
+        <span class="chip">Debugging the undebuggable <span class="count">31</span></span>
+        <span class="chip">Perfectly-timed memes <span class="count">27</span></span>
+        <span class="chip">Saying the hard thing kindly <span class="count">24</span></span>
+        <span class="chip">Endless patience <span class="count">19</span></span>
+      </div>
+    </section>
+
+    <!-- ============ RECOMMENDATIONS ============ -->
+    <section class="card card-pad" data-screen-label="Recommendations">
+      <h2 class="section-title">Recommendations</h2>
+      <p class="section-sub">~8 notes from the people who got to work beside her</p>
+
+      <div class="rec">
+        <div class="rec-head">
+          <div class="ph mini-avatar ph-circle">pic</div>
+          <div><div class="rec-name">A colleague's name</div><div class="rec-rel">Their role · worked with Shermin directly</div></div>
+        </div>
+        <p class="rec-quote">A heartfelt paragraph goes here — the specific way she made this person's work and days better, written in their own voice.</p>
+      </div>
+
+      <div class="rec">
+        <div class="rec-head">
+          <div class="ph mini-avatar ph-circle">pic</div>
+          <div><div class="rec-name">A colleague's name</div><div class="rec-rel">Their role · on the team together</div></div>
+        </div>
+        <p class="rec-quote">A shorter note — a memory, a thank-you, and a wish for what's next.</p>
+      </div>
+
+      <div class="rec">
+        <div class="rec-head">
+          <div class="ph mini-avatar ph-circle">pic</div>
+          <div><div class="rec-name">A colleague's name</div><div class="rec-rel">Their role · managed alongside her</div></div>
+        </div>
+        <p class="rec-quote">One more tribute — the kind of thing you'd want to read on your last day.</p>
+      </div>
+    </section>
+
+    <p class="footer">Made with <span class="heart">&#9829;</span> by the team</p>
+
+  </div>
+
+</body>
+</html>
