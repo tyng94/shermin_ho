@@ -12,7 +12,6 @@ remote_state {
     region         = local.aws_region
     encrypt      = true
     use_lockfile = true
-    profile      = "shermin"
   }
 
 }
@@ -23,8 +22,7 @@ generate "provider" {
 
   contents = <<EOF
 provider "aws" {
-  region  = "${local.aws_region}"
-  profile = "shermin"
+  region = "${local.aws_region}"
 
   default_tags {
     tags = {
